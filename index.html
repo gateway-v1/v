@@ -3,21 +3,21 @@
 <head>
     <title>Loading...</title>
     <style>
-        body { background-color: black; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: sans-serif; }
+        body { background-color: black; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: sans-serif; margin: 0; }
     </style>
 </head>
 <body>
-    <div>Redirecting you to your folder...</div>
+    <div>Verifying connection... Please wait.</div>
 
     <script>
     function doRedirect() {
         const now = new Date().getTime();
-        const expiryTime = 20 * 60 * 1000; // 20 minutes in milliseconds
+        const expiryTime = 20 * 60 * 1000; // 20 Minutes
         
         let count = localStorage.getItem("click_count") || 0;
         let startTime = localStorage.getItem("start_time") || 0;
 
-        // RESET LOGIC: If 20 mins passed, clear the history
+        // Reset logic: If 20 mins passed, user must see ads again
         if (startTime && (now - startTime > expiryTime)) {
             localStorage.removeItem("click_count");
             localStorage.removeItem("start_time");
@@ -26,22 +26,24 @@
 
         count = parseInt(count);
 
+        // YOUR SPECIFIC LINKS
+        const adLink = "https://www.profitablecpmratenetwork.com/bqkav38q?key=9d978dc85f9832760e79eff2a613445e";
+        const driveLink = "https://drive.google.com/drive/folders/10E_Urqh_jsuBy5iJvUSnQ0O3a9yq-4VS";
+
         if (count === 0) {
-            // FIRST CLICK: Save time, show Ad 1
+            // Click 1: Goes to CPM link
             localStorage.setItem("click_count", "1");
             localStorage.setItem("start_time", now);
-            window.location.href = "PASTE_YOUR_AD_LINK_1_HERE";
+            window.location.href = adLink;
         } else if (count === 1) {
-            // SECOND CLICK: Show Ad 2
+            // Click 2: Goes to CPM link again
             localStorage.setItem("click_count", "2");
-            window.location.href = "PASTE_YOUR_AD_LINK_2_HERE";
+            window.location.href = adLink;
         } else {
-            // FINAL: Show the Google Drive link
-            window.location.href = "PASTE_YOUR_DRIVE_LINK_HERE";
+            // Click 3+: Goes to Google Drive (Lasts for 20 mins)
+            window.location.href = driveLink;
         }
     }
-
-    // Run the function immediately
     doRedirect();
     </script>
 </body>
