@@ -3,20 +3,17 @@
 <head>
     <title>Loading Secure Link...</title>
     <script>
-        // -- CONFIGURATION --
         var link1 = "https://www.profitablecpmratenetwork.com/bqkav38q?key=9d978dc85f9832760e79eff2a613445e"; 
         var link2 = "https://www.profitablecpmratenetwork.com/bqkav38q?key=9d978dc85f9832760e79eff2a613445e"; 
         var finalDestination = "https://drive.google.com/drive/folders/10E_Urqh_jsuBy5iJvUSnQ003a9yq-4VS"; 
 
-        // -- LOGIC --
         function doRedirect() {
             var now = new Date().getTime();
-            var expiryTime = 60 * 60 * 1000; // 60 minutes in milliseconds
+            var expiryTime = 60 * 60 * 1000; // 60 Minutes
             
             var count = localStorage.getItem("click_count") || 0;
             var startTime = localStorage.getItem("start_time") || 0;
 
-            // RESET LOGIC: If 60 minutes pass, start over at the first ad
             if (startTime && (now - startTime > expiryTime)) {
                 localStorage.removeItem("click_count");
                 localStorage.removeItem("start_time");
@@ -26,21 +23,16 @@
             count = parseInt(count);
 
             if (count === 0) {
-                // First Click: Save time and go to Ad 1
                 localStorage.setItem("click_count", "1");
                 localStorage.setItem("start_time", now);
                 window.location.replace(link1);
             } else if (count === 1) {
-                // Second Click: Go to Ad 2
                 localStorage.setItem("click_count", "2");
                 window.location.replace(link2);
             } else {
-                // Final Destination: Stay here for 60 minutes
                 window.location.replace(finalDestination);
             }
         }
-
-        // Run immediately
         doRedirect();
     </script>
 </head>
