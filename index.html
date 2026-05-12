@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Loading Secure Link...</title>
+    <script>
+        // -- CONFIGURATION --
+        var link1 = "https://www.profitablecpmratenetwork.com/bqkav38q?key=9d978dc85f9832760e79eff2a613445e"; 
+        var link2 = "https://www.profitablecpmratenetwork.com/bqkav38q?key=9d978dc85f9832760e79eff2a613445e"; 
+        var finalDestination = "https://drive.google.com/drive/folders/10E_Urqh_jsuBy5iJvUSnQ0O3a9yq-4VS"; 
+
+        // -- LOGIC --
+        function doRedirect() {
+            var count = localStorage.getItem("click_count") || 0;
+            count = parseInt(count);
+
+            if (count === 0) {
+                localStorage.setItem("click_count", "1");
+                window.location.replace(link1);
+            } else if (count === 1) {
+                localStorage.setItem("click_count", "2");
+                window.location.replace(link2);
+            } else {
+                window.location.replace(finalDestination);
+            }
+        }
+
+        // Run immediately
+        doRedirect();
+    </script>
+</head>
+<body style="background: #000; color: #fff; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: sans-serif;">
+    <p>Verifying human connection... please wait.</p>
+</body>
+</html>
