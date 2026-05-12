@@ -1,42 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loading Secure Link...</title>
     <script>
-        var link1 = "https://www.profitablecpmratenetwork.com/bqkav38q?key=9d978dc85f9832760e79eff2a613445e"; 
-        var link2 = "https://www.profitablecpmratenetwork.com/bqkav38q?key=9d978dc85f9832760e79eff2a613445e"; 
-        var finalDestination = "https://drive.google.com/drive/folders/10E_Urqh_jsuBy5iJvUSnQ003a9yq-4VS"; 
+        // CONFIGURATION
+        const link1 = "https://www.profitablecpmratenetwork.com/bqkav38q?key=9d978dc85f9832760e79eff2a613445e"; 
+        const link2 = "https://www.profitablecpmratenetwork.com/bqkav38q?key=9d978dc85f9832760e79eff2a613445e"; 
+        const finalDestination = "https://drive.google.com/drive/folders/10E_Urqh_jsuBy5iJvUSnQ003a9yq-4VS"; 
 
         function doRedirect() {
-            var now = new Date().getTime();
-            var expiryTime = 60 * 60 * 1000; // 60 Minutes
+            const now = Date.now();
+            const expiryTime = 60 * 60 * 1000; // 60 Minutes
             
-            var count = localStorage.getItem("click_count") || 0;
-            var startTime = localStorage.getItem("start_time") || 0;
+            let count = localStorage.getItem("click_count") || "0";
+            let startTime = localStorage.getItem("start_time");
 
-            if (startTime && (now - startTime > expiryTime)) {
-                localStorage.removeItem("click_count");
-                localStorage.removeItem("start_time");
-                count = 0;
+            // Reset logic: If timer expired, clear everything
+            if (startTime && (now - parseInt(startTime) > expiryTime)) {
+                localStorage.clear();
+                count = "0";
             }
 
-            count = parseInt(count);
+            let currentCount = parseInt(count);
 
-            if (count === 0) {
+            if (currentCount === 0) {
+                // First click: Start timer and go to Ad 1
+                localStorage.setItem("start_time", now.toString());
                 localStorage.setItem("click_count", "1");
-                localStorage.setItem("start_time", now);
                 window.location.replace(link1);
-            } else if (count === 1) {
+            } else if (currentCount === 1) {
+                // Second click: Go to Ad 2
                 localStorage.setItem("click_count", "2");
                 window.location.replace(link2);
             } else {
+                // Final State: User stays on Drive for the remainder of the hour
                 window.location.replace(finalDestination);
             }
         }
-        doRedirect();
+
+        // Run immediately on page load
+        window.onload = doRedirect;
     </script>
 </head>
-<body style="background: #000; color: #fff; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: sans-serif; margin: 0;">
-    <p>Verifying human connection... please wait.</p>
+<body style="background: #000; color: #fff; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: sans-serif; margin: 0; overflow: hidden;">
+    <div style="text-align: center;">
+        <p style="font-size: 1.2rem; letter-spacing: 1px;">Verifying human connection...</p>
+        <p style="font-size: 0.8rem; color: #888;">Please wait, redirecting to secure folder.</p>
+    </div>
 </body>
 </html>
