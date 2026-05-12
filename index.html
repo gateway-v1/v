@@ -5,19 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loading Secure Link...</title>
     <script>
-        // CONFIGURATION
+        // CONFIGURATION - ALL YOUR LINKS ARE ADDED BELOW
         const link1 = "https://www.profitablecpmratenetwork.com/bqkav38q?key=9d978dc85f9832760e79eff2a613445e"; 
         const link2 = "https://www.profitablecpmratenetwork.com/bqkav38q?key=9d978dc85f9832760e79eff2a613445e"; 
-        const finalDestination = "https://drive.google.com/drive/folders/10E_Urqh_jsuBy5iJvUSnQ003a9yq-4VS"; 
+        const finalDestination = "https://drive.google.com/drive/folders/10E_Urqh_jsuBy5iJvUSnQ0O3a9yq-4VS"; 
 
         function doRedirect() {
             const now = Date.now();
-            const expiryTime = 60 * 60 * 1000; // 60 Minutes
+            const expiryTime = 60 * 60 * 1000; // 60 Minutes Access
             
             let count = localStorage.getItem("click_count") || "0";
             let startTime = localStorage.getItem("start_time");
 
-            // Reset logic: If timer expired, clear everything
+            // Reset if 60 minutes have passed
             if (startTime && (now - parseInt(startTime) > expiryTime)) {
                 localStorage.clear();
                 count = "0";
@@ -26,21 +26,21 @@
             let currentCount = parseInt(count);
 
             if (currentCount === 0) {
-                // First click: Start timer and go to Ad 1
+                // First Visit: Go to Ad 1
                 localStorage.setItem("start_time", now.toString());
                 localStorage.setItem("click_count", "1");
                 window.location.replace(link1);
             } else if (currentCount === 1) {
-                // Second click: Go to Ad 2
+                // Second Visit: Go to Ad 2
                 localStorage.setItem("click_count", "2");
                 window.location.replace(link2);
             } else {
-                // Final State: User stays on Drive for the remainder of the hour
+                // Success: Go to Drive (User has 1 hour pass)
                 window.location.replace(finalDestination);
             }
         }
 
-        // Run immediately on page load
+        // Run as soon as the page loads
         window.onload = doRedirect;
     </script>
 </head>
